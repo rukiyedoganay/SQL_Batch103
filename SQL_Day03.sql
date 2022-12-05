@@ -319,8 +319,9 @@ SET musteri_isim=(SELECT irtibat_ismi FROM tedarikciler WHERE firma_ismi='Apple'
 WHERE urun_isim='Laptop'
 
 
-
-
+-- ÖDEV: Ankara’da calisani olan markalarin marka id'lerini ve calisan sayilarini listeleyiniz.
+SELECT marka_id,calisan_sayisi FROM markalar
+WHERE marka_isim IN(SELECT isyeri FROM calisanlar2 WHERE sehir='Ankara')
 
 
 
