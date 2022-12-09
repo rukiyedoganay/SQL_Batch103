@@ -74,7 +74,7 @@ isim varchar(50),
 sehir varchar(50), 
 maas int,  
 sirket varchar(20),
-CONSTRAINT personel_pk PRIMARY KEY (id)
+CONSTRAINT personel_pki PRIMARY KEY (id)
 );
 INSERT INTO personel VALUES(123456789, 'Ali Yilmaz', 'Istanbul', 5500, 'Honda');  
 INSERT INTO personel VALUES(234567890, 'Veli Sahin', 'Istanbul', 4500, 'Toyota');  
@@ -102,6 +102,7 @@ select * from personel_bilgi
 
 --Soru10: id’si 123456789 olan personelin Personel tablosundan sehir ve maasini, 
 -- personel_bilgi  tablosundan da tel ve cocuk sayisini yazdirin
+
 select sehir as sehir_ve_telefon,maas as maas_ve_cocuksayisi from personel where id=123456789
 union
 select tel ,cocuk_sayisi from personel_bilgi where id=123456789;
@@ -111,11 +112,17 @@ select tel ,cocuk_sayisi from personel_bilgi where id=123456789;
 --UNION ALL ise tekrarlı verilerle birlikte tüm sorguları getirir.
 
 --Soru11: personel tablosundan maasi 5000'den az olan tum isimleri ve maasları bulunuz
+SELECT isim,maas FROM personel WHERE maas<5000
+UNION ALL
+SELECT sehir,maas FROM personel WHERE maas<5000
+
+
+
 select isim,maas from personel where maas<5000
 union all
 select sehir,maas from personel where maas<4000
 
------------------------INTERSECT OPERATOR--------------------
+-----------------------INTERSECT OPERATOR--------------------KESİŞİM--
 --farklı iki tablodaki sorgulamalarda ortak elemanları bulur. iki sorgu arasına yazılır ve kesişimi getirir.
 
 --Soru12: a- Personel tablosundan Istanbul veya Ankara'da calısan id'lerini yazdir.
@@ -143,9 +150,11 @@ SELECT isim FROM personel WHERE sirket='Tofas'
 --İki sorgulamada hariç tutulacak bir sorgulama yapılacaksa EXCEPT komutu kullanılır.
 
 --Soru15: 5000'den az maas alıp Honda'da calısmayanları yazdıralım.
+
 SELECT isim,sirket FROM personel WHERE maas<5000 
 EXCEPT 
 SELECT isim,sirket FROM personel WHERE sirket='Honda' 
+
 
 
 
